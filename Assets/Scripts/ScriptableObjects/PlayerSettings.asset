@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
   playerName: Player
-  jumpForce: 8000
+  jumpForce: 300
+  volumeMusic: 0
+  volumeSFX: 0

@@ -4,8 +4,6 @@ public class EnemyMovement : MonoBehaviour
 {
     [Header("Enemy Settings")]
     [SerializeField] EnemySettingsSO enemySettings;
-    [Header("Player")]
-    [SerializeField] GameObject player;
 
     private Rigidbody2D rb;
 
@@ -21,10 +19,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
-        {
-            GameStateManager.Instance.SetGameState(GameState.GAME_OVER);
-        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

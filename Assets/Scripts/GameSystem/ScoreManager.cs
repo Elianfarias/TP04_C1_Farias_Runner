@@ -35,4 +35,9 @@ public class ScoreManager : MonoBehaviour
         }
         
     }
+
+    public void IncreaseMeters(int meters)
+    {
+        metersTraveled += meters;
+    }
 }

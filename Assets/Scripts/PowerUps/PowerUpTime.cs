@@ -1,0 +1,32 @@
+using UnityEngine;
+
+public class PowerUpTime : MonoBehaviour, IPowerUp
+{
+    [SerializeField] private float speed;
+
+    public bool isActive = false;
+    private Rigidbody2D rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = speed * Time.fixedDeltaTime * Vector2.left;
+    }
+
+    public bool IsActive()
+    {
+        return isActive;
+    }
+
+    public void ApplyPowerUp()
+    {
+        isActive = true;
+        ScoreManager.instance.IncreaseMeters(10);
+        gameObject.SetActive(false);
+        isActive = false;
+    }
+}

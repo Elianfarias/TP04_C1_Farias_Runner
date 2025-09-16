@@ -3,9 +3,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    private static readonly int State = Animator.StringToHash("state");
+
     [Header("Player Settings")]
     [SerializeField] PlayerSettingsSO playerSettings;
     [SerializeField] AudioClip clipJump;
+    [SerializeField] PlayerAnimatorEnum playerAnimatorEnum;
 
     [Header("Keys Movement Configuration")]
     [SerializeField] private KeyCode KeyJump = KeyCode.Space;
@@ -20,9 +23,32 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        animator.SetInteger(State, (int)playerAnimatorEnum);
+    }
+
     private void FixedUpdate()
     {
         PlayerMove();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            animator.SetInteger(State, (int)PlayerAnimatorEnum.Walk);
+            isJumping = false;
+        }
+
+        if (collision.gameObject.CompareTag("Enemy"))
+            animator.SetInteger(State, (int)PlayerAnimatorEnum.Die);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PowerUp"))
+            collision.GetComponent<IPowerUp>().ApplyPowerUp();
     }
 
     private void PlayerMove()
@@ -33,28 +59,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveAxisY(Vector2 axisY)
     {
-        if(isJumping)
+        if (isJumping)
             return;
 
+        isJumping = true;
+        animator.SetInteger(State, (int)PlayerAnimatorEnum.Jump);
         AudioController.Instance.PlaySoundEffect(clipJump);
-        rb.AddForce(playerSettings.JumpForce * Time.fixedDeltaTime * axisY);
+        rb.AddForce(playerSettings.JumpForce * Time.fixedDeltaTime * axisY, ForceMode2D.Impulse);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void PlayerHasDied()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            animator.SetBool("isJumping", false);
-            isJumping = false;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            animator.SetBool("isJumping", true);
-            isJumping = true;
-        }
+        GameStateManager.Instance.SetGameState(GameState.GAME_OVER);
     }
 }
