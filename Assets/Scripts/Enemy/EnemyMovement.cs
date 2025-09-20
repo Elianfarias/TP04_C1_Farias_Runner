@@ -5,6 +5,7 @@ public class EnemyMovement : MonoBehaviour
     [Header("Enemy Settings")]
     [SerializeField] EnemySettingsSO enemySettings;
 
+    public float speedIncremental = 1f;
     private Rigidbody2D rb;
 
     private void Awake()
@@ -14,12 +15,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = enemySettings.SpeedMovement * Time.fixedDeltaTime * Vector2.left;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
+        rb.velocity = (enemySettings.SpeedMovement * speedIncremental) * Time.fixedDeltaTime * Vector2.left;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

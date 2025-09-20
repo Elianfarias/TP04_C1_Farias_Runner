@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance;
     [SerializeField] private GameObject[] enemiesPrefab;
     [SerializeField] private float spawnInterval = 3f;
     [SerializeField] private AudioClip clipSpawn;
 
     public float lastEnemyActive;
+    private float speed = 1.0f;
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Update()
     {
@@ -25,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
 
         while (!setActive || randIndexesUsed.Count == enemiesPrefab.Length)
         {
-            if(randIndexesUsed.Count == enemiesPrefab.Length)
+            if (randIndexesUsed.Count == enemiesPrefab.Length)
                 break;
 
             var randomIndex = Random.Range(0, enemiesPrefab.Count());
@@ -39,6 +45,8 @@ public class EnemySpawner : MonoBehaviour
             if (enemySelected.activeSelf)
                 continue;
 
+            EnemyMovement enemyMovement = enemySelected.GetComponent<EnemyMovement>();
+            enemyMovement.speedIncremental = speed;
             enemySelected.transform.position = transform.position;
             enemySelected.SetActive(true);
             countSpawnersActivated++;
@@ -47,5 +55,10 @@ public class EnemySpawner : MonoBehaviour
         }
 
         lastEnemyActive = Time.time + spawnInterval;
+    }
+
+    public void IncreaseSpeed()
+    {
+        speed += 0.2f;
     }
 }

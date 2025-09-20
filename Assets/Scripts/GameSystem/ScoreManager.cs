@@ -6,9 +6,12 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private int metersPerSpeedIncrease = 50;
 
     public static ScoreManager instance;
     public int metersTraveled = 0;
+
+    private int nextSpeedMilestone = 50;
 
     private void Awake()
     {
@@ -30,6 +33,12 @@ public class ScoreManager : MonoBehaviour
     {
         while(GameStateManager.Instance.CurrentGameState == GameState.PLAYING)
         {
+            if (metersTraveled >= nextSpeedMilestone)
+            {
+                OnSpeedIncrease();
+                nextSpeedMilestone += metersPerSpeedIncrease;
+            }
+
             metersTraveled++;
             yield return new WaitForSeconds(0.5f);
         }
@@ -39,5 +48,10 @@ public class ScoreManager : MonoBehaviour
     public void IncreaseMeters(int meters)
     {
         metersTraveled += meters;
+    }
+
+    private void OnSpeedIncrease()
+    {
+        EnemySpawner.Instance.IncreaseSpeed();
     }
 }
