@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
             AudioController.Instance.PlaySoundEffect(clipSpawn);
         }
 
-        lastEnemyActive = Time.time + Random.Range(0, spawnInterval + 1);
+        lastEnemyActive = Time.time + Random.Range(0.5f, spawnInterval + 1);
     }
 
     public void IncreaseSpeed()
