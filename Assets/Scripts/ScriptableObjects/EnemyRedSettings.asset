@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemyRedSettings
   m_EditorClassIdentifier: 
   enemyName: Enemy 1
-  speedMovement: 250
+  speedMovement: 220

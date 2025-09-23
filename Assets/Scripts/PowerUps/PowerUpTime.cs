@@ -3,6 +3,8 @@ using UnityEngine;
 public class PowerUpTime : MonoBehaviour, IPowerUp
 {
     [SerializeField] private float speed;
+    [Header("Sound")]
+    [SerializeField] private AudioClip powerUpSound;
 
     public bool isActive = false;
     private Rigidbody2D rb;
@@ -24,6 +26,7 @@ public class PowerUpTime : MonoBehaviour, IPowerUp
 
     public void ApplyPowerUp()
     {
+        AudioController.Instance.PlaySoundEffect(powerUpSound);
         isActive = true;
         ScoreManager.instance.IncreaseMeters(10);
         gameObject.SetActive(false);

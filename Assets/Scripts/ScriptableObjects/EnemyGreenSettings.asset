@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemyGreenSettings
   m_EditorClassIdentifier: 
   enemyName: Enemy 1
-  speedMovement: 170
+  speedMovement: 180

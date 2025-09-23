@@ -5,7 +5,6 @@ public class SpawnerController : MonoBehaviour
 {
     [Header("PowerUp/Blocks")]
     [SerializeField] private GameObject[] powerUps;
-    [SerializeField] private Vector3 powerUpScale;
     [Header("Limits")]
     [SerializeField] private Vector2 minPosition;
     [SerializeField] private Vector2 maxPosition;
@@ -26,7 +25,6 @@ public class SpawnerController : MonoBehaviour
         float randomPositionY = Random.Range(minPosition.y, maxPosition.y);
         GameObject powerUpSelected = powerUps[randomIndex];
 
-        powerUpSelected.transform.localScale = powerUpScale;
         powerUpSelected.SetActive(true);
         powerUpSelected.transform.position = new Vector2(randomPositionX, randomPositionY);
 

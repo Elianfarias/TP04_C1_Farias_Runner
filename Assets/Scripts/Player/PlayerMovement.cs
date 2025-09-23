@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private bool isJumping = false;
 
+    private bool isInvencible = false;
+
+    public bool IsInvencible => isInvencible;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
             isJumping = false;
         }
 
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && !isInvencible)
             animator.SetInteger(State, (int)PlayerAnimatorEnum.Die);
     }
 
@@ -71,5 +75,10 @@ public class PlayerMovement : MonoBehaviour
     public void PlayerHasDied()
     {
         GameStateManager.Instance.SetGameState(GameState.GAME_OVER);
+    }
+
+    public void SwitchPlayerInvencible()
+    {
+        isInvencible = !isInvencible;
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7014280678120323259}
   - component: {fileID: 1123628656767314791}
   - component: {fileID: 5411451043875196532}
+  - component: {fileID: 7508442081094111505}
   m_Layer: 0
   m_Name: clock
   m_TagString: PowerUp
@@ -165,4 +166,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 170
+  powerUpSound: {fileID: 8300000, guid: 4d979a3e03401ac4b9721474693a433a, type: 3}
   isActive: 0
+--- !u!95 &7508442081094111505
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2748228613588515596}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 07b0dc5e8a3233745a55d9fa32d395eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
