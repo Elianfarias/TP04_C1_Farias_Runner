@@ -28,7 +28,7 @@ public class PowerUpTime : MonoBehaviour, IPowerUp
     {
         AudioController.Instance.PlaySoundEffect(powerUpSound);
         isActive = true;
-        ScoreManager.instance.IncreaseMeters(10);
+        ScoreManager.Instance.IncreaseMeters(10);
         gameObject.SetActive(false);
         isActive = false;
     }

@@ -8,15 +8,15 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private int metersPerSpeedIncrease = 50;
 
-    public static ScoreManager instance;
+    public static ScoreManager Instance;
     public int metersTraveled = 0;
 
     private int nextSpeedMilestone = 50;
 
     private void Awake()
     {
-        if(instance == null)
-            instance = this;
+        if(Instance == null)
+            Instance = this;
     }
 
     private void Start()
@@ -40,6 +40,12 @@ public class ScoreManager : MonoBehaviour
             }
 
             metersTraveled++;
+
+            if (metersTraveled == 50)
+                BiomeParallaxOrchestrator.Instance.SwitchToBiomeB();
+            else if(metersTraveled == 100)
+                BiomeParallaxOrchestrator.Instance.SwitchToBiomeC();
+
             yield return new WaitForSeconds(0.5f);
         }
         
@@ -53,5 +59,6 @@ public class ScoreManager : MonoBehaviour
     private void OnSpeedIncrease()
     {
         EnemySpawner.Instance.IncreaseSpeed();
+        BiomeParallaxOrchestrator.Instance.worldSpeed += 2f;
     }
 }

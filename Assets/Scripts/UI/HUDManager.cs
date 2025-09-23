@@ -36,7 +36,7 @@ public class HUDManager : MonoBehaviour
 
     public void ShowPanelPlayerLose()
     {
-        scoreText.text = ScoreManager.instance.metersTraveled.ToString() + " m";
+        scoreText.text = ScoreManager.Instance.metersTraveled.ToString() + " m";
         panelPlayerLose.SetActive(true);
     }
 

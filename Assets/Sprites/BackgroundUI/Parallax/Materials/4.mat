@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 4
-  m_Shader: {fileID: 10751, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: dc69fcc8fd1640345b91776a50bd7de4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -26,10 +26,11 @@ Material:
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 64ae7f745ce781a489ccb71f1ef4e7fd, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 1.5075045, y: 0}
+        m_Offset: {x: 1.9136062, y: 0}
     m_Ints: []
     m_Floats:
     - _Cutoff: 0.5
-    m_Colors: []
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -1,21 +1,57 @@
 using UnityEngine;
 
-[ExecuteAlways]
 public class ParallaxLayer : MonoBehaviour
 {
-    [SerializeField] private float speed = 0.2f;
+    [SerializeField] public float speed = 0.2f;                
+    [SerializeField] private string texPropName = "_MainTex";
+    [SerializeField] private string colorPropName = "_Color";
 
-    private float distance;
-    Material material;
+    private Renderer _r;
+    private MaterialPropertyBlock _mpb;
+    private Vector2 _tiling = Vector2.one;
+    private float _alpha = 1f;
+    private float _offsetX;
 
-    private void Start()
+    private void Awake()
     {
-        material = GetComponent<MeshRenderer>().sharedMaterial;
+        _r = GetComponent<Renderer>();
+        _mpb = new MaterialPropertyBlock();
+
+        var mat = _r.sharedMaterial;
+        if (mat != null)
+        {
+            Vector4 st = mat.GetVector(texPropName + "_ST");
+            if (st != Vector4.zero) _tiling = new Vector2(st.x, st.y);
+        }
+        Apply();
     }
 
-    private void Update()
+    public void SyncWithClock(float baseDistance)
     {
-        distance += speed * Time.deltaTime;
-        material.SetTextureOffset("_MainTex", Vector3.right * distance);
+        _offsetX = baseDistance * speed;
+        Apply();
+    }
+
+    public void SetAlpha(float a)
+    {
+        _alpha = a;
+        Apply();
+    }
+
+    private void Apply()
+    {
+        if (_r == null) return;
+        _r.GetPropertyBlock(_mpb);
+
+        _mpb.SetVector(texPropName + "_ST", new Vector4(_tiling.x, _tiling.y, _offsetX, 0f));
+
+        if (_r.sharedMaterial != null && _r.sharedMaterial.HasProperty(colorPropName))
+        {
+            Color c = _r.sharedMaterial.GetColor(colorPropName);
+            c.a = _alpha;
+            _mpb.SetColor(colorPropName, c);
+        }
+
+        _r.SetPropertyBlock(_mpb);
     }
 }
