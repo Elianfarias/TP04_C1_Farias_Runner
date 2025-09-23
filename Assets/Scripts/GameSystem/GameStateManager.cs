@@ -37,6 +37,12 @@ public class GameStateManager : MonoBehaviour
             case GameState.PAUSED:
                 break;
             case GameState.GAME_OVER:
+                var recordMeters = PlayerPrefs.GetInt("PlayerScore");
+                var score = ScoreManager.Instance.metersTraveled;
+
+                if (score > recordMeters)
+                    PlayerPrefs.SetInt("PlayerScore", score);
+
                 AudioController.Instance.StopBackgroundMusic();
                 AudioController.Instance.PlaySoundEffect(clipGameOver);
                 HUDManager.Instance.ShowPanelPlayerLose();
