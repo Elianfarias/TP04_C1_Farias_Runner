@@ -6,9 +6,9 @@ public class PlayerMovement : MonoBehaviour
     private static readonly int State = Animator.StringToHash("state");
 
     [Header("Player Settings")]
-    [SerializeField] PlayerSettingsSO playerSettings;
-    [SerializeField] AudioClip clipJump;
-    [SerializeField] PlayerAnimatorEnum playerAnimatorEnum;
+    [SerializeField] private PlayerSettingsSO playerSettings;
+    [SerializeField] private AudioClip clipJump;
+    [SerializeField] private PlayerAnimatorEnum playerAnimatorEnum;
 
     [Header("Keys Movement Configuration")]
     [SerializeField] private KeyCode KeyJump = KeyCode.Space;

@@ -4,7 +4,7 @@ using UnityEngine;
 public class ParallaxController : MonoBehaviour
 {
     [Tooltip("Velocidad global del bioma (multiplica a cada layer.speed)")]
-    [SerializeField] public float baseSpeed = 0.2f;
+    public float baseSpeed = 0.2f;
 
     private readonly List<ParallaxLayer> _layers = new();
     private float _baseDistance;
